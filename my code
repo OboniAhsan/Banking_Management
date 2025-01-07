@@ -1,0 +1,63 @@
+Certainly! Here's the corrected version of your code:
+
+#include<iostream>
+using namespace std;
+
+class BankAccount
+{
+protected:
+    string UserName;
+    int accountNum;
+    double balance;
+
+public:
+    BankAccount(string name, int num, double bal)
+    {
+        UserName = name;
+        accountNum = num;
+        balance = bal;
+    }
+
+    int Deposit(double amount)
+    {
+        balance = balance + amount;
+        cout << "Amount Successfully Deposited : " << amount << endl;
+        return balance;
+    }
+
+    void Withdraw(double amount)
+    {
+        if (amount > balance)
+        {
+            cout << "Don't Have sufficient Balance ";
+        }
+        else
+        {
+            balance = balance - amount;
+            cout << "Amount Successfully Withdrawn " << amount << endl;
+        }
+    }
+
+    friend void showInfo(BankAccount account);
+};
+
+void showInfo(BankAccount account)
+{
+    cout << "Account Holder Name : " << account.UserName << endl;
+    cout << "Account Number  : " << account.accountNum << endl;
+    cout << "Balance  : " << account.balance << endl;
+}
+
+class Person : public BankAccount
+{
+public:
+    Person(string name, int num, double bal) : BankAccount(name, num, bal)
+    {
+    }
+
+    void CheckBalance()
+    {
+        cout << "Updated Balance : " << balance << endl;
+    }
+};
+
